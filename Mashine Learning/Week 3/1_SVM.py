@@ -36,7 +36,7 @@ def SVMMethod():
     plt.title('SVM')
     plt.show()
 
-
+    print(1)
 
 
 SVMMethod()
