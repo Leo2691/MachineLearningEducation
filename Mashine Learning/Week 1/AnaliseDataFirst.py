@@ -1,0 +1,72 @@
+import pandas as pn
+import numpy as np
+
+data = pn.read_csv("D:/titanic.csv", index_col='PassengerId') #колонка PassengerId задает нумерацию строк датафрейма
+
+def Experiments():
+    date20 = data[10:20] #диапозон значений
+    headAndSample = data[0:1] #заголовок и первая строка
+
+    dt = data.head(5) #5 первых строк фрейма
+
+    dt = data.head(0)
+
+    dt1 = data.head(1)
+
+    print(dt)
+    # print(dt1)
+
+def count_Mens_Wom():
+    n = data['Sex'].values
+    m = data['Sex'].value_counts()
+    print(n, m)
+
+def Survived():
+    n = data['Survived'].value_counts()
+
+    perc = (n[1] / (n[1] + n[0])) * 100
+
+    print (n, perc)
+
+def Pclass():
+    pcl = data['Pclass'].value_counts()
+
+    first = pcl[1] * 100 / (np.sum(pcl))
+
+    print(pcl, first)
+
+def Age():
+    pcl = data['Age'].mean()
+
+    pcl1 = data['Age'].median()
+    #first = pcl[1] * 100 / (np.sum(pcl))
+    print(pcl, pcl1)
+
+def PirsonCor():
+    pcl = data['SibSp'].corr(data['Parch'], method='pearson')
+
+    #pcl1 = data['Parch'].corr(data['SibSp'], method='pearson')
+
+    print (pcl)
+
+#def mostPopularName():
+    #pcl = data.Name[data['Sex'].]
+
+    #print(pcl)
+
+Experiments()
+#count_Mens_Wom()
+#Survived()
+
+Pclass()
+
+#Age()
+
+#PirsonCor()
+
+#mostPopularName()
+
+
+
+
+
