@@ -1,5 +1,6 @@
 import numpy as np
 import sklearn.model_selection as sk
+import pandas as pd
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import SVC
@@ -40,6 +41,12 @@ def SVM_Text():
 
     #обучили классфикатор
     clf.fit(X_tr, y)
+
+    words = vectorizer.get_feature_names()
+    coef = pd.DataFrame(clf.coef_.data, clf.coef_.indices)
+    top_words = coef[0].map(lambda w: abs(w)).sort_values(ascending=False).head(10).index.map(lambda i: words[i])
+    top_words.sort()
+    print(top_words)
 
 
 
