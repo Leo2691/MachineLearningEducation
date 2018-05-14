@@ -21,6 +21,7 @@ def Gradient_descent():
 
     #находим сумму
 
+    """Реализуем Градиентный спуск"""
     #цикл по итерациям для расчета w1 и w2
     for j in np.arange(0, 10000):
         sumLog = 0
@@ -29,7 +30,9 @@ def Gradient_descent():
             x1 = float(row.values[1])
 
             #sumLog = sumLog + y.values[i] * x0
-            sumLog = sumLog + y.values[i] * x0 * (1.0 - 1.0 / (1.0 + math.exp((-y.values[i] * (w1 * x0 + w2 * x1))))) - k * C * w1
+
+            #Из формулы производной считаем член суммы
+            sumLog = sumLog + y.values[i] * x0 * (1.0 - 1.0 / (1.0 + math.exp((-y.values[i] * (w1 * x0 + w2 * x1)))))
             #i = i + 1
 
         w1_old = w1
@@ -59,6 +62,7 @@ def Gradient_descent():
         #print(w1, w2)
 
     prob = []
+    #iterrows возвращаем строку и индекс
     for i, row in X.iterrows():
         x0 = float(row.values[0])
         x1 = float(row.values[1])
