@@ -29,5 +29,23 @@ POS_CASH  = pd.read_csv(PATH + 'POS_CASH_balance.csv')
 payments = pd.read_csv(PATH + 'installments_payments.csv')
 
 #Отделяем метки
+y = data['TARGET']
+del data['TARGET']
+
+#кодирем категориальные признаки
+
+categorial_features = [col for col in data.columns if data[col].dtype == 'object']
+
+one_hot_df = pd.concat([data, test])
+one_hot_df = pd.get_dummies(one_hot_df, columns=categorial_features)
+
+data = one_hot_df.iloc[:data.shape[0],:]
+test = one_hot_df.iloc[data.shape[0]:,]
+
+print('Формат тренировочной выборки', data.shape)
+print('Формат тестовой выборки', test.shape)
+
+
+
 
 print (1)
