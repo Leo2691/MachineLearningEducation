@@ -66,6 +66,24 @@ Pclass()
 
 #mostPopularName()
 
+aaaaa1 = data.groupby('Sex')[['Survived']].apply(np.mean)
+aaaaa2 = data.groupby('Sex')['Survived'].apply(np.mean)
+
+aaaaa3 = data.groupby('Sex')[['Survived']].aggregate(np.mean)
+aaaaa4 = data.groupby('Sex')[['Survived']].mean()
+
+print(aaaaa1)
+print('\n', aaaaa2)
+print('\n', aaaaa3)
+print('\n', aaaaa4)
+
+aaaaa5 = data.groupby(['Sex', 'Pclass'])['Survived'].aggregate(np.mean)
+aaaaa6 = data.groupby(['Sex', 'Pclass'])['Survived'].aggregate(np.mean).unstack()
+aaaaa7 = data.pivot_table('Survived', index='Sex', columns='Pclass')
+
+print('\n', aaaaa5)
+print('\n', aaaaa6)
+print('\n', aaaaa7)
 
 
 
