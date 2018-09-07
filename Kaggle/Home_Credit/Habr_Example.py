@@ -3,13 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
+import scipy
+
 
 """ 1. Первочное знакомство с данными -------------------------------------------"""
 import os
 PATH = os.path.dirname(os.path.realpath(__file__))  + "/../input/"
 #PATH = "/Users/lev/PycharmProjects/MachineLearningEducation/Kaggle/input/"
-
-
 
 print(os.listdir(PATH))
 
