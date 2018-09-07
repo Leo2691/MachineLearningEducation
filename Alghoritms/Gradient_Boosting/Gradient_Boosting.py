@@ -133,5 +133,3 @@ plt.plot(xx, boost_regr_mse.predict(xx.reshape([xx.shape[0], 1])), color='red')
 
 plt.show()
 
-print(112)
-
