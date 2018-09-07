@@ -6,7 +6,10 @@ import seaborn as sns
 
 """ 1. Первочное знакомство с данными -------------------------------------------"""
 import os
-PATH = "../input/"
+PATH = os.path.dirname(os.path.realpath(__file__))  + "/../input/"
+#PATH = "/Users/lev/PycharmProjects/MachineLearningEducation/Kaggle/input/"
+
+
 
 print(os.listdir(PATH))
 
