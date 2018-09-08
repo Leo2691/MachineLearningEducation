@@ -202,7 +202,6 @@ pr1 = predict(tree, row1)
 for i in pr1.keys():
     print(i)
 
-#print(pr)
-print(pr1)
+print(pr)
 
 print(entropy(my_data))
