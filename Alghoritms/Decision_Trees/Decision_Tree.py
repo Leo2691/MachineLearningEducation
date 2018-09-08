@@ -205,4 +205,4 @@ for i in pr1.keys():
 #print(pr)
 print(pr1)
 
-#print(entropy(my_data))
+print(entropy(my_data))
