@@ -194,10 +194,15 @@ tree = buildtree(my_data, list_index, scoref=entropy)
 #prune(tree, 0.1)
 
 row = ['google', 'USA', 'no', 24]
-pr = predict(tree, row)
+row1 = ['digg', 'USA', 'no', 27]
 
-for i in pr.keys():
+pr = predict(tree, row)
+pr1 = predict(tree, row1)
+
+for i in pr1.keys():
     print(i)
 
-print(pr)
+#print(pr)
+print(pr1)
+
 #print(entropy(my_data))
