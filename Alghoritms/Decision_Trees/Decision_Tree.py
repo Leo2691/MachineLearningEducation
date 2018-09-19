@@ -12,7 +12,7 @@ my_data = [['slashdot', 'USA', 'yes', 18, 'None'],
            ['slashdot', 'France', 'yes', 19, 'None'],
            ['digg', 'USA', 'no', 18, 'None'],
            ['google', 'UK', 'no', 18, 'None'],
-           ['kiwitobes', 'UK', 'no', 19, 'None'],
+           ['kiwitobes', 'UK', 'no', 19, ' '],
            ['digg', 'New Zeland', 'yes', 12, 'Basic'],
            ['slashdot', 'UK', 'no', 21, 'None'],
            ['google', 'UK', 'yes', 18, 'Basic'],
@@ -148,7 +148,7 @@ def predict(tree, row):
     #если в экземпляре класса дерева значение атрибута result пустое, значит это промежуточная вершина
     if (tree.result == None):
 
-        #сравниваем значение предиката с пологом value через вызов лямбда-функции
+        #сравниваем значение предиката с порогом value через вызов лямбда-функции
         if(l_function(row)):
             return(predict(tree.tb, row))
 

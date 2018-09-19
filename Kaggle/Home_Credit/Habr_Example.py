@@ -133,7 +133,7 @@ plt.title('Age of Client'); plt.xlabel('Age (years)'); plt.ylabel('Count');
 #plt.show()
 
 #сгладим гистограмму гаусовским ядром
-#KDE зайков выплаченных вовремя
+#KDE займов, выплаченных вовремя
 m = app_train.loc[app_train['TARGET'] == 0, 'DAYS_BIRTH'] / 365
 
 #sns.kdeplot(app_train.loc[app_train['TARGET'] == 0, 'DAYS_BIRTH'] / 365)

@@ -1,6 +1,7 @@
 import pandas as nd
 import numpy as np
 import sklearn.model_selection as sk
+import os
 
 from sklearn.model_selection import cross_val_score
 
@@ -12,10 +13,18 @@ from sklearn.neighbors import KNeighborsClassifier
 
 """Пример работы классификатора"""
 def classification():
-    X = nd.read_csv("D:\wine.csv", usecols=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
+
+    PATH = os.path.dirname(os.path.realpath(__file__))
+
+    print (os.listdir(PATH))
+
+    #app_train = pd.read_csv(PATH + "train_1.8.csv", encoding = "cp1251", decimal=',')
+    #app_test = pd.read_csv(PATH + "test_1.9.csv", encoding = "cp1251")
+    
+    X = nd.read_csv(PATH + "/wine.csv", usecols=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
     #print(pX.shape)
 
-    Y = nd.read_csv("D:\wine.csv", usecols=[0])
+    Y = nd.read_csv(PATH + "/wine.csv", usecols=[0])
 
     #X = np.array(pX)
     #Y = np.array(pY)
@@ -37,6 +46,8 @@ def classification():
 
     #вычисляем ошибку обучения на разбитой выботке (процент распознвание для каждого куска выборки)
     result = cross_val_score(estimator = clf, X=X, y=Y,cv = kf, scoring="accuracy")
+
+    pred = clf.predict(X[:].values[0].reshape((1, -1)))
 
     #среднее значение распознавания
     mean = np.array(result).mean()
@@ -105,5 +116,5 @@ def classification_cross_val():
 
 
 #Simple()
-
-classification_cross_val()
+classification()
+#classification_cross_val()
