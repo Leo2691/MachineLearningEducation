@@ -11,6 +11,7 @@ pd.set_option('display.max_columns', None)
 #pd.set_option('display.max_rows', None)
 
 PATH = os.path.dirname(os.path.realpath(__file__))  + "/../input/"
+TARGET = "Нефть, м3"
 
 print (os.listdir(PATH))
 
@@ -40,7 +41,7 @@ pd.DataFrame(app_train).to_csv(PATH + "train_1.8.csv", encoding = "cp1251", inde
 pd.DataFrame(app_test).to_csv(PATH + "test_1.9.csv", encoding = "cp1251", index = False)"""
 
 #target
-y = app_train["Нефть, т"]
+y = app_train[TARGET]
 
 """Список столбцов, которых нет в обучающей выборке"""
 dif = [col for col in pd.DataFrame(app_train).columns if col not in pd.DataFrame(app_test).columns]
@@ -127,7 +128,7 @@ print("Размерность обучающей выборки ", app_train.sha
 print("Размерность тестовой выборки ", app_test.shape)
 #print(list_cat)
 
-app_train["Нефть, т"] = y
+app_train[TARGET] = y
 print(NaNst.missing_values_table(app_train))
 
 """очищаем обучающую выборку от объектов, где значение "Нефть т" NaN"""
@@ -143,8 +144,8 @@ print("Размерность тестовой выборки ", app_test.shape)
 для каждого объекта"""
 list_dict = []
 for name, group in app_train.groupby('Скважина', sort=False):
-    count = pd.DataFrame(group['Нефть, т']).shape[0]
-    elem = dict(('Нефть_' + str(i), pd.Series(group['Нефть, т']).values[i]) for i in np.arange(count))
+    count = pd.DataFrame(group[TARGET]).shape[0]
+    elem = dict(('Нефть_' + str(i), pd.Series(group[TARGET]).values[i]) for i in np.arange(count))
     elem['Скважина'] = name
     list_dict.append(elem)
 
@@ -172,7 +173,7 @@ def construct_matrix(train, mounth_pred):
             return_mart = group
 
             list_drop = ['Нефть_' + str(i) for i in np.arange(mounth_pred, 6)]
-            list_drop.append('Нефть, т')
+            list_drop.append(TARGET)
 
             return_mart = return_mart.drop(list_drop, axis=1)
             return_target = group['Нефть_' + str(mounth_pred)]
@@ -210,7 +211,7 @@ print("Размерность тестовой выборки ", app_test_m0.sha
 """Классификатор для месяца 0 (не входит в конечный прогноз)---------------------------------------------------------------------------------------------"""
 clf1 = LGBMRegressor()
 clf1.fit(app_train_m0, y_m0)
-clf2 = RandomForestRegressor(n_estimators=1000)
+clf2 = RandomForestRegressor(n_estimators=100)
 clf2.fit(app_train_m0, y_m0)
 
 result = print("Результат работы на обучающей выборке (месяц 0) = ", r2_score(y_m0, clf1.predict(app_train_m0)))
@@ -233,7 +234,7 @@ print("Размерность тестовой выборки ", app_test_m1.sha
 """Классификатор для месяца 1 (первый прогнозный месяц)---------------------------------------------------------------------------------------------------"""
 clf1 = LGBMRegressor()
 clf1.fit(app_train_m1, y_m1)
-clf2 = RandomForestRegressor(n_estimators=1000)
+clf2 = RandomForestRegressor(n_estimators=100)
 clf2.fit(app_train_m1, y_m1)
 
 result = print("Результат работы на обучающей выборке (месяц 1) = ", r2_score(y_m1, clf1.predict(app_train_m1)))
@@ -250,11 +251,11 @@ y_pr_m1 = clf2.predict(app_train_m1)
 y_m1 = pd.DataFrame(y_m1)
 
 list = []
-mean_mounth = [0, 675.6338, 726.72258, 711.01872, 597.10545, 597.10545]
+mean_mounth = app_train.groupby("Номер месяца")[TARGET].mean()
 d = 0
 for i in np.arange(len(app_test)):
-    list.append(y_pr_m1[i])
-    for j in np.arange(2, len(mean_mounth)):
+    #list.append(y_pr_m1[i])
+    for j in np.arange(1, len(mean_mounth)):
            list.append(mean_mounth[j])
     list.append(mean_mounth[len(mean_mounth) - 1])
 
