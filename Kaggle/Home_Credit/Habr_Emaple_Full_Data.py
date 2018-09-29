@@ -314,18 +314,18 @@ class djLGB(BaseEstimator, ClassifierMixin):
 t = 1
 
 
-data['target'] = y
+#data['target'] = y
 
-pd.DataFrame(data).to_csv("prepearing_data_train.csv", index = False)
-pd.DataFrame(test).to_csv("prepearing_data_test.csv", index = False)
+#pd.DataFrame(data).to_csv("prepearing_data_train.csv", index = False)
+#pd.DataFrame(test).to_csv("prepearing_data_test.csv", index = False)
 
-#clf = djLGB(seed=2000 + 10*t, nest_lgb=1.3, nest_xgb=1.3)
-#clf.fit(data, y)
-
-
+clf = djLGB(seed=2000 + 10*t, nest_lgb=1.3, nest_xgb=1.3)
+clf.fit(data, y)
 
 
-#pred = clf.predict(test)
+
+
+pred = clf.predict(test)
 
 # Датафрейм для загрузки
 #submission = test[['SK_ID_CURR']]
