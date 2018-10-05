@@ -5,3 +5,10 @@
 *.rar
 *.html
 *.las
+*.txt
+*.ipynb
+*.json
+*.pkl
+*.tsv
+*.pickle
+*.arff
