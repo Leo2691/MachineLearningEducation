@@ -12,3 +12,9 @@
 *.tsv
 *.pickle
 *.arff
+*.png
+*.model
+*.ppts
+*.pdf
+*.jpg
+*.dot
